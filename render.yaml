@@ -7,7 +7,7 @@ services:
     staticPublishPath: ./dist
     envVars:
       - key: VITE_API_URL
-        value: https://system-design-todobackend-1.onrender.com
+        value: https://da-backend-1-zvvu.onrender.com
     routes:
       - type: rewrite
         source: /*

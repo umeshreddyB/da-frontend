@@ -9,7 +9,7 @@ function stripBrowserOrigin(proxy) {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
-  const apiTarget = env.VITE_API_URL || 'http://localhost:5050';
+  const apiTarget = env.VITE_API_URL || 'https://da-backend-1-zvvu.onrender.com';
 
   return {
     plugins: [react()],
