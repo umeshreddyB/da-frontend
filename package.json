@@ -1,0 +1,43 @@
+{
+  "name": "data-science-study-plan-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node -e \"console.error('\\nThis is the FRONTEND repo. Do not run it on Render.\\n\\n  Backend (Render): https://github.com/kammari-venkatesh/system-design-todobackend\\n  Frontend (Vercel):  https://github.com/kammari-venkatesh/system-design-todo\\n'); process.exit(1)\""
+  },
+  "dependencies": {
+    "@tiptap/extension-code-block-lowlight": "^3.26.0",
+    "@tiptap/extension-highlight": "^3.26.0",
+    "@tiptap/extension-link": "^3.26.0",
+    "@tiptap/extension-placeholder": "^3.26.0",
+    "@tiptap/extension-table": "^3.26.0",
+    "@tiptap/extension-table-cell": "^3.26.0",
+    "@tiptap/extension-table-header": "^3.26.0",
+    "@tiptap/extension-table-row": "^3.26.0",
+    "@tiptap/extension-task-item": "^3.26.0",
+    "@tiptap/extension-task-list": "^3.26.0",
+    "@tiptap/extension-underline": "^3.26.0",
+    "@tiptap/pm": "^3.26.0",
+    "@tiptap/react": "^3.26.0",
+    "@tiptap/starter-kit": "^3.26.0",
+    "canvas-confetti": "^1.9.4",
+    "date-fns": "^4.4.0",
+    "framer-motion": "^12.40.0",
+    "lowlight": "^3.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.1",
+    "recharts": "^3.8.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.7"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "build": {
+    "env": {
+      "VITE_API_URL": "https://system-design-todobackend-1.onrender.com"
+    }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
