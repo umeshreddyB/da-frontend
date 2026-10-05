@@ -79,7 +79,6 @@ export function ProgressProvider({ children }) {
         if (!hasSavedWork(merged) && hasSavedWork(local)) {
           merged = { ...EMPTY, ...local, skillMap: { ...EMPTY.skillMap, ...(local.skillMap || {}) } };
           await api.patchProgress(merged);
-          localStorage.removeItem(DS_PROGRESS_KEY);
         }
 
         if (!Object.keys(merged.knowledgeNotes || {}).length && Object.keys(merged.dayNotes || {}).length) {
@@ -105,6 +104,12 @@ export function ProgressProvider({ children }) {
   useEffect(() => {
     if (!plan.length) return;
     setAnalytics(buildLocalAnalytics(plan, progress));
+    if (!hasSavedWork(progress)) return;
+    try {
+      localStorage.setItem(DS_PROGRESS_KEY, JSON.stringify(progress));
+    } catch {
+      // The browser copy is a backup. A full disk should not block the screen.
+    }
   }, [plan, progress]);
 
   const pendingPatch = useRef({});

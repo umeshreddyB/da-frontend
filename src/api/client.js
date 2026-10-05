@@ -6,6 +6,7 @@ function apiUrl(path) {
 
 const TOKEN_KEY = 'sd_token';
 const TOKEN_EXPIRY_KEY = 'sd_token_expiry';
+const USER_KEY = 'ds_user';
 const SESSION_MS = 7 * 24 * 60 * 60 * 1000;
 
 export function getToken() {
@@ -29,14 +30,46 @@ export function clearToken() {
   localStorage.removeItem(TOKEN_EXPIRY_KEY);
 }
 
+export function readCachedUser() {
+  try {
+    const raw = localStorage.getItem(USER_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function cacheUser(user) {
+  if (!user?.phone) {
+    localStorage.removeItem(USER_KEY);
+    return;
+  }
+  localStorage.setItem(USER_KEY, JSON.stringify({
+    id: user.id,
+    name: user.name,
+    phone: String(user.phone).replace(/\D/g, ''),
+  }));
+}
+
 async function request(path, options = {}) {
   const headers = { 'Content-Type': 'application/json', ...options.headers };
   const token = getToken();
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  const res = await fetch(apiUrl(path), { ...options, headers });
+  let res;
+  try {
+    res = await fetch(apiUrl(path), { ...options, headers });
+  } catch {
+    const error = new Error('Could not reach the server. Try again in a moment.');
+    error.status = 0;
+    throw error;
+  }
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.message || 'Request failed');
+  if (!res.ok) {
+    const error = new Error(data.message || 'Request failed');
+    error.status = res.status;
+    throw error;
+  }
   return data;
 }
 
